@@ -8,6 +8,7 @@ import { AppNavigation } from "./src/navigation/AppNavigation";
 import { initFirebase } from "./src/utils";
 import "react-native-get-random-values";
 //import { Carousel } from "./src/components";
+//hola
 
 LogBox.ignoreAllLogs();
 
