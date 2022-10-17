@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { ListItem, Icon, Text }  from "react-native-elements";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { ListItem, Icon, Text } from "react-native-elements";
 import { map } from "lodash";
+import { ChangeDisplayNameForm} from "./ChangeDisplayNameForm";
 import { Modal } from "../../components";
-import { ChangeDisplayNameForm } from "./ChangeDisplayNameForm";
 import { ChangeEmailForm } from "./ChangeEmailForm";
 import { ChangePasswordForm } from "./ChangePasswordForm";
 
@@ -15,44 +15,48 @@ export function AccountOptions(props) {
     const onCloseOpenModal = () => setShowModal((prevState) => !prevState);
 
     const selectedComponent = (key) => {
-        if(key === "displayName") {
-            setRenderComponent(<ChangeDisplayNameForm onClose={onCloseOpenModal} onReload={onReload} />);
+        if(key === "displayName"){
+           setRenderComponent(<ChangeDisplayNameForm onClose={onCloseOpenModal} onReload={onReload}/>);
         }
-        if(key === "email") {
-            setRenderComponent(<ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload} />);
+        else if(key === "email"){
+            setRenderComponent(<ChangeEmailForm onClose={onCloseOpenModal} onReload={onReload}/>);
         }
-        if(key === "password") {
-            setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal} />);
+        else if(key === "password"){
+            setRenderComponent(<ChangePasswordForm onClose={onCloseOpenModal}/>);
         }
+
         onCloseOpenModal();
-    };
+    }
 
-    const menuOptions = getMenuOptions(selectedComponent); 
-
-    return (
+    const menuOptions = getMenuOptions(selectedComponent);
+    
+  return (
     <View>
       {map(menuOptions, (menu, index) => (
-        <ListItem key={index} bottomDivider onPress={menu.onPress} >
-            <Icon 
-            type={menu.iconType} 
-            name={menu.iconNameLeft} 
-            color={menu.iconColorLeft} 
-            />
+        <ListItem
+        key={index}
+        bottomDivider
+        onPress={menu.onPress}
+        >
+            <Icon
+            type={menu.iconType}
+            name={menu.iconNameLeft}
+            color={menu.iconColorLeft}
+                />
             <ListItem.Content>
-                <ListItem.Title> {menu.title} </ListItem.Title>
+                <ListItem.Title>{menu.title}</ListItem.Title>
             </ListItem.Content>
-            <Icon 
-            type={menu.iconType}  
-            name={menu.iconNameRight}
-            color={menu.iconColorRight}
+            <Icon
+                type={menu.iconType}
+                name={menu.iconNameRight}
+                color={menu.iconColorRight}
             />
         </ListItem>
       ))}
 
-      <Modal show={showModal} close={onCloseOpenModal} >
+      <Modal show={showModal} close={onCloseOpenModal}>
         {renderComponent}
       </Modal>
-
     </View>
   );
 }
@@ -64,27 +68,27 @@ function getMenuOptions(selectedComponent) {
             title: "Cambiar nombre y apellidos",
             iconType: "material-community",
             iconNameLeft: "account-circle",
-            iconColorLeft: "#ccc",
+            iconColorLeft: "#CCC",
             iconNameRight: "chevron-right",
-            iconColorRight: "#ccc",
+            iconColorRight: "#CCC",
             onPress: () => selectedComponent("displayName"),
         },
-        {
+        {   
             title: "Cambiar email",
             iconType: "material-community",
             iconNameLeft: "at",
-            iconColorLeft: "#ccc",
+            iconColorLeft: "#CCC",
             iconNameRight: "chevron-right",
-            iconColorRight: "#ccc",
+            iconColorRight: "#CCC",
             onPress: () => selectedComponent("email"),
         },
         {
             title: "Cambiar contraseña",
             iconType: "material-community",
             iconNameLeft: "lock-reset",
-            iconColorLeft: "#ccc",
+            iconColorLeft: "#CCC",
             iconNameRight: "chevron-right",
-            iconColorRight: "#ccc",
+            iconColorRight: "#CCC",
             onPress: () => selectedComponent("password"),
         },
     ];

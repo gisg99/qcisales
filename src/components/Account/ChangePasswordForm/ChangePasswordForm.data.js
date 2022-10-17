@@ -4,19 +4,14 @@ export function initialValues() {
     return {
         password: "",
         newPassword: "",
-        confirmNewPassword: "",
+        newPasswordC: "",
     };
 }
 
 export function validationSchema() {
     return Yup.object({
-        password: Yup.string().required("Este campo es obligatorio"),
-        newPassword: Yup.string().required("Este campo es obligatorio"),
-        confirmNewPassword: Yup.string()
-        .required("Este campo es obligatorio")
-        .oneOf(
-            [Yup.ref("newPassword")], 
-            "Las nuevas contraseñas no coinciden" 
-            ),
+        password: Yup.string().required("La contraseña actual es obligatoria"),
+        newPassword: Yup.string().required("La nueva contraseña es obligatoria"),
+        newPasswordC: Yup.string().required("La confirmación de contraseña es obligatoria").oneOf([Yup.ref("newPassword")],"Las contraseñas nuevas tienen que ser iguales"),
     });
 }

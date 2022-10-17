@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     content: {
@@ -12,13 +12,13 @@ export const styles = StyleSheet.create({
         marginTop: 20,
     },
     icon: {
-        color: "#c1c1c1",
+        color: "#C1C1C1",
     },
     btnContainer: {
         marginTop: 20,
         width: "95%",
     },
     btn: {
-        backgroundColor: "#f60808",
-    },  
+        backgroundColor: "#F07335",
+    }
 });

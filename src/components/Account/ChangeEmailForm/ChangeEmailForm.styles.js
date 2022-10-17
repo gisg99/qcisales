@@ -12,6 +12,6 @@ export const styles = StyleSheet.create({
         width: "95%",
     },
     btn: {
-        backgroundColor: "#f60808",
+        backgroundColor: "#F07335",
     },
 });

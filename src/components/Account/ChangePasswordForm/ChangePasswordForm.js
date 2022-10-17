@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
+import React, { useState } from "react";
+import { View } from "react-native";
 import { Input, Button } from "react-native-elements";
-import { useFormik } from 'formik';
-import { getAuth, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import { useFormik } from "formik";
+import { getAuth, updatePassword, EmailAuthProvider, reauthenticateWithCredential} from "firebase/auth";
 import Toast from "react-native-toast-message";
-import { initialValues, validationSchema } from "./ChangePasswordForm.data";
 import { styles } from "./ChangePasswordForm.styles";
-import { async } from '@firebase/util';
-
+import { initialValues, validationSchema } from "./ChangePasswordForm.data";
 
 export function ChangePasswordForm(props) {
+
     const { onClose } = props;
-
     const [showPassword, setShowPassword] = useState(false);
-    const [showPasswordDos, setShowPasswordDos] = useState(false);
-    const [showPasswordTres, setShowPasswordTres] = useState(false);
-
     const onShowPassword = () => setShowPassword((prevState) => !prevState);
-    const onShowPasswordDos = () => setShowPasswordDos((prevState) => !prevState);
-    const onShowPasswordTres = () => setShowPasswordTres((prevState) => !prevState);
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -27,78 +20,72 @@ export function ChangePasswordForm(props) {
         onSubmit: async (formValue) => {
             try {
                 const currentUser = getAuth().currentUser;
-
-                const credentials= EmailAuthProvider.credential(
+                const credentials = EmailAuthProvider.credential(
                     currentUser.email,
-                    formValue.password
+                    formValue.password,
                 );
                 reauthenticateWithCredential(currentUser, credentials);
-
                 await updatePassword(currentUser, formValue.newPassword);
-
                 onClose();
             } catch (error) {
+                console.log(error);
                 Toast.show({
                     type: "error",
                     position: "bottom",
                     text1: "Error al cambiar la contraseña",
-                }); 
+                });
             }
-        },
+        }
     });
 
   return (
-    <View style={styles.content} >
-      <Input 
-      placeholder="Contraseña actual" 
-      containerStyle={styles.input} 
+    <View style={styles.content}>
+      <Input
+      placeholder="Contraseña actual"
+      containerStyle={styles.input}
       secureTextEntry={showPassword ? false : true}
       rightIcon={{
         type: "material-community",
-        name: showPassword ? "eye-off-outline" : "eye-outline",
-        color: "#c2c2c2",
+        name: showPassword ? "eye-outline" : "eye-off-outline",
+        color: "#C2C2C2",
         onPress: onShowPassword,
       }}
       onChangeText={(text) => formik.setFieldValue("password", text)}
       errorMessage={formik.errors.password}
       />
-
-<Input 
-      placeholder="Nueva contraseña" 
-      containerStyle={styles.input} 
-      secureTextEntry={showPasswordDos ? false : true}
+      <Input
+      placeholder="Contraseña nueva"
+      containerStyle={styles.input}
+      secureTextEntry={showPassword ? false : true}
       rightIcon={{
         type: "material-community",
-        name: showPasswordDos ? "eye-off-outline" : "eye-outline",
-        color: "#c2c2c2",
-        onPress: onShowPasswordDos,
+        name: showPassword ? "eye-outline" : "eye-off-outline",
+        color: "#C2C2C2",
+        onPress: onShowPassword,
       }}
       onChangeText={(text) => formik.setFieldValue("newPassword", text)}
       errorMessage={formik.errors.newPassword}
       />
-
-<Input 
-      placeholder="Repite nueva contraseña" 
-      containerStyle={styles.input} 
-      secureTextEntry={showPasswordTres ? false : true}
+      <Input
+      placeholder="Repetir contraseña nueva"
+      containerStyle={styles.input}
+      secureTextEntry={showPassword ? false : true}
       rightIcon={{
         type: "material-community",
-        name: showPasswordTres ? "eye-off-outline" : "eye-outline",
-        color: "#c2c2c2",
-        onPress: onShowPasswordTres,
+        name: showPassword ? "eye-outline" : "eye-off-outline",
+        color: "#C2C2C2",
+        onPress: onShowPassword,
       }}
-      onChangeText={(text) => formik.setFieldValue("confirmNewPassword", text)}
-      errorMessage={formik.errors.confirmNewPassword}
+      onChangeText={(text) => formik.setFieldValue("newPasswordC", text)}
+      errorMessage={formik.errors.newPasswordC}
       />
-
-      <Button 
-      title="Cambiar contraseña" 
-      containerStyle={styles.btnContainer} 
-      buttonStyle={styles.btn} 
-      onPress={formik.handleSubmit}
-      loading={formik.isSubmitting} 
+      <Button
+        title="Cambiar"
+        containerStyle={styles.btnContainer}
+        buttonStyle={styles.btn}
+        onPress={formik.handleSubmit}
+        loading={formik.isSubmitting}
       />
-      
     </View>
-  );
+  )
 }

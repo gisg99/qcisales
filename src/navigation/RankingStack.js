@@ -7,7 +7,11 @@ const Stack = createNativeStackNavigator();
 export function RankingStack() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name={screen.ranking.ranking} component={RankingScreen} options={{title: "Ranking"}} />
+            <Stack.Screen
+            name={screen.ranking.page}
+            component={RankingScreen}
+            options={{title: screen.ranking.name}}
+            />
         </Stack.Navigator>
-    )
+    );
 }

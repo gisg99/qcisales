@@ -9,9 +9,7 @@ export function initialValues() {
 
 export function validationSchema() {
     return Yup.object({
-        email: Yup.string()
-        .email("El email no es válido")
-        .required("El email es obligatorio "),
-        password: Yup.string().required("La cotraseña es obligatoria"),
+        email: Yup.string().email("El email no es valido").required("El nuevo email es obligatorio"),
+        password: Yup.string().required("La contraseña es obligatoria"),
     });
 }

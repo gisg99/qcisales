@@ -1,38 +1,43 @@
-const vendedoresStack = {
-    tab: "VendedoresTab",
-    vendedores: "Vendedores",
-    addVendedor: "AddVendedor",
-    vendedor: "Vendedor",
-    addReviewVendedor: "AddReviewVendedor",
+const sellerStack = {
+    tab: "SellersTab",
+    page: "SellersPage",
+    name: "Vendedores",
+    add: "addSeller",
+    addName: "Añadir Vendedor",
 };
 
-const favoritosStack = {
-    tab: "FavoritosTab",
-    favoritos: "Favoritos",
+const favoritesStack = {
+    tab: "FavoritesTab",
+    page: "FavoritesPage",
+    name: "Favoritos",
 };
 
 const rankingStack = {
     tab: "RankingTab",
-    ranking: "Ranking",
+    page: "RankingPage",
+    name: "Ranking",
 };
 
-const buscarStack = {
-    tab: "BuscarTab",
-    buscar: "Buscar",
+const searchStack = {
+    tab: "SearchTab",
+    page: "SearchPage",
+    name: "Buscar",
 };
 
-const cuentaStack = {
-    tab: "CuentaTab",
-    cuenta: "Cuenta",
+const accountStack = {
+    tab: "AccountTab",
+    page: "AccountPage",
+    name: "Mi cuenta",
     login: "Login",
+    loginName: "Iniciar sesión",
     register: "Register",
+    registerName: "Registrarse",
 };
-
 
 export const screen = {
-    vendedores: vendedoresStack,
-    favoritos: favoritosStack,
+    seller: sellerStack,
+    favorites: favoritesStack,
     ranking: rankingStack,
-    buscar: buscarStack,
-    cuenta: cuentaStack, 
+    search: searchStack,
+    account: accountStack,
 };

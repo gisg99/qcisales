@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    content:  {
+    content: {
         alignItems: "center",
         paddingVertical: 10,
     },
@@ -12,6 +12,6 @@ export const styles = StyleSheet.create({
         width: "95%",
     },
     btn: {
-        backgroundColor: "#f60808",
+        backgroundColor: "#F07335",
     },
 });
