@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { Input, Button } from "react-native-elements";
 import { useFormik } from 'formik';
-import { getAuth, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+// import { getAuth, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
+import * as firebase from 'firebase';
 import Toast from "react-native-toast-message";
 import { initialValues, validationSchema } from "./ChangePasswordForm.data";
 import { styles } from "./ChangePasswordForm.styles";
-import { async } from '@firebase/util';
+// import { async } from '@firebase/util';
 
 
 export function ChangePasswordForm(props) {
@@ -25,25 +26,40 @@ export function ChangePasswordForm(props) {
         validationSchema: validationSchema(),
         validateOnChange: false,
         onSubmit: async (formValue) => {
-            try {
-                const currentUser = getAuth().currentUser;
 
-                const credentials= EmailAuthProvider.credential(
-                    currentUser.email,
-                    formValue.password
-                );
-                reauthenticateWithCredential(currentUser, credentials);
+          console.log("hola");
 
-                await updatePassword(currentUser, formValue.newPassword);
+          var currentPassword = formValue.password;
+          var newPassword = formValue.newPassword;
+          console.log("hola2");
 
-                onClose();
-            } catch (error) {
-                Toast.show({
-                    type: "error",
-                    position: "bottom",
-                    text1: "Error al cambiar la contraseña",
-                }); 
-            }
+          var currentUser = firebase.auth().currentUser;
+          currentUser.updatePassword(newPassword).then(() => {
+            console.log("Se cambió la contraseña");
+          }).catch((error) => {
+            console.log(error.message);
+          });
+
+
+            // try {
+            //     const currentUser = getAuth().currentUser;
+
+            //     const credentials = EmailAuthProvider.credential(
+            //         currentUser.email,
+            //         formValue.password
+            //     );
+            //     reauthenticateWithCredential(currentUser, credentials);
+
+            //     await updatePassword(currentUser, formValue.newPassword);
+
+            //     onClose();
+            // } catch (error) {
+            //     Toast.show({
+            //         type: "error",
+            //         position: "bottom",
+            //         text1: "Error al cambiar la contraseña",
+            //     }); 
+            // }
         },
     });
 
