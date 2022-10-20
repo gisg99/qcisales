@@ -11,7 +11,9 @@ export function ChangePasswordForm(props) {
 
     const { onClose } = props;
     const [showPassword, setShowPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
     const onShowPassword = () => setShowPassword((prevState) => !prevState);
+    const onShowNewPassword = () => setShowNewPassword((prevState) => !prevState);
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -56,12 +58,12 @@ export function ChangePasswordForm(props) {
       <Input
       placeholder="Contraseña nueva"
       containerStyle={styles.input}
-      secureTextEntry={showPassword ? false : true}
+      secureTextEntry={showNewPassword ? false : true}
       rightIcon={{
         type: "material-community",
-        name: showPassword ? "eye-outline" : "eye-off-outline",
+        name: showNewPassword ? "eye-outline" : "eye-off-outline",
         color: "#C2C2C2",
-        onPress: onShowPassword,
+        onPress: onShowNewPassword,
       }}
       onChangeText={(text) => formik.setFieldValue("newPassword", text)}
       errorMessage={formik.errors.newPassword}
@@ -69,12 +71,12 @@ export function ChangePasswordForm(props) {
       <Input
       placeholder="Repetir contraseña nueva"
       containerStyle={styles.input}
-      secureTextEntry={showPassword ? false : true}
+      secureTextEntry={showNewPassword ? false : true}
       rightIcon={{
         type: "material-community",
-        name: showPassword ? "eye-outline" : "eye-off-outline",
+        name: showNewPassword ? "eye-outline" : "eye-off-outline",
         color: "#C2C2C2",
-        onPress: onShowPassword,
+        onPress: onShowNewPassword,
       }}
       onChangeText={(text) => formik.setFieldValue("newPasswordC", text)}
       errorMessage={formik.errors.newPasswordC}

@@ -53,7 +53,7 @@ export function RegisterForm() {
         secureTextEntry={showPassword ? false : true}
         rightIcon={<Icon
             type="material-community"
-            name={showPassword ? "eye-off-outline" : "eye-outline"}
+            name={showPassword ? "eye-outline" : "eye-off-outline"}
             iconStyle={styles.icon}
             onPress={showHiddenPassword}
             />}
@@ -66,7 +66,7 @@ export function RegisterForm() {
         secureTextEntry={showPassword ? false : true}
         rightIcon={<Icon
             type="material-community"
-            name={showPassword ? "eye-off-outline" : "eye-outline"}
+            name={showPassword ? "eye-outline" : "eye-off-outline"}
             iconStyle={styles.icon}
             onPress={showHiddenPassword}
             />}
