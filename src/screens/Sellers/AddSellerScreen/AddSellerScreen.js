@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Button } from "react-native-elements";
 import { useFormik } from "formik";
-import { InfoForm } from "../../../components/Sellers/AddSeller/InfoForm";
+import { InfoForm, UploadImagesForm } from "../../../components/Sellers/AddSeller";
 import { initialValues, validationSchema } from "./AddSellerScreen.data";
 import { styles } from "./AddSellerScreen.styles";
 
@@ -19,6 +19,7 @@ export function AddSellerScreen() {
   return (
     <View>
       <InfoForm formik={formik}/>
+      <UploadImagesForm formik={formik}/>
       <Button
         title="Crear Vendedor"
         buttonStyle={styles.AddSeller}
