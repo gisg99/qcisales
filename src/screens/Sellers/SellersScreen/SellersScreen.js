@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { getAuth, onAuthStateChanged  } from "firebase/auth";
-import { screen } from "../../../utils";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { screen, db } from "../../../utils";
 import { styles } from "./SellersScreen.styles";
 
 export function SellersScreen(props) {
@@ -18,7 +19,16 @@ export function SellersScreen(props) {
         setCurrentUser(user);
       });
     }, [])
-    
+
+    useEffect(() => {
+      const q = query(
+        collection(db, "sellers"),
+        orderBy("createdAt", "desc")
+      );
+      onSnapshot(q, (snapshot) => {
+        console.log(snapshot.docs);
+      });
+    }, []);
 
     const goToAddSeller = () => {
         navigation.navigate(screen.seller.add);

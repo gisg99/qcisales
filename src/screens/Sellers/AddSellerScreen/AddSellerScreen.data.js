@@ -6,6 +6,7 @@ export function initialValues() {
         sellerName: "",
         phone: "",
         description: "",
+        images: [],
     };
 }
 
@@ -22,5 +23,6 @@ export function validationSchema() {
             .max(9999999999, "El numero debe incluir 10 caracteres exactos")
             .required("Campo obligatorio"),
         description: Yup.string().required("Campo obligatorio"),
+        images: Yup.array().min(1, "Se requiere una imagen como mínimo").required("La imagen es obligatoria"),
     })
 }
