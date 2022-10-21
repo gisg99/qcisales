@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import { getAuth, onAuthStateChanged  } from "firebase/auth";
-import { collection, onSnapshot, orderBy, Query, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { LoadingModal } from "../../../components/Shared";
+import { ListSellers } from "../../../components/Sellers";
 import { screen, db } from "../../../utils";
 import { styles } from "./SellersScreen.styles";
 
@@ -12,6 +14,7 @@ export function SellersScreen(props) {
     // necesario importarla pero si fuera en un componente
     const { navigation } = props; //podemos pasar el navigation mediante los props
     const [currentUser, setCurrentUser] = useState(null);
+    const [sellers, setSellers] = useState(null);
 
     useEffect(() => {
       const auth = getAuth();
@@ -21,14 +24,15 @@ export function SellersScreen(props) {
     }, [])
 
     useEffect(() => {
-        const q = query(
-            collection(db, "sellers")
+        var q = query(
+            collection(db, "sellers"),
+            orderBy("createdAt", "desc")
         );
 
         onSnapshot(q, (snapshot) => {
-            console.log(snapshot);
+            setSellers(snapshot.docs);
         });
-    }, [])
+    }, []);
     
 
     const goToAddSeller = () => {
@@ -39,7 +43,12 @@ export function SellersScreen(props) {
     }
     return (
         <View style={styles.content}>
-            <Text>Estamos en la screen Sellers</Text>
+            {!sellers ? (
+                <LoadingModal show text="Cargando vendedores"/>
+            ) : (
+                <ListSellers sellers={sellers}/>
+            )
+        }
             {currentUser && (
                 <Icon 
                     reverse

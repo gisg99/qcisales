@@ -23,7 +23,7 @@ export function AddSellerScreen() {
         newData.id = uuid();
         newData.createdAt = new Date();
         
-        await setDoc(doc(db, "sellers", newData.id), newData)
+        await setDoc(doc(db, "sellers", newData.id), newData);
 
         navigation.goBack();
       } catch (error) {
