@@ -1,14 +1,16 @@
 import React from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { Text, Image } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+import { screen } from "../../../utils";
 import { styles } from "./ListSellers.styles";
 
 export function ListSellers(props) {
     const { sellers } = props;
+    const navigation = useNavigation();
 
 const goToSeller = (seller) => {
-    console.log("Ir al vendedor");
-    console.log(seller.name);
+    navigation.navigate(screen.seller.seller, { id: seller.id });
 }
 
   return (
@@ -20,7 +22,7 @@ const goToSeller = (seller) => {
 
             return (
                 <TouchableOpacity
-                    onPress={() => goTo(seller)}
+                    onPress={() => goToSeller(seller)}
                 >
                     <View style={styles.sellers}>
                        <Image source={{uri: seller.images[0]}} style={styles.image}/>

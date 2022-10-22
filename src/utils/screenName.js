@@ -4,6 +4,7 @@ const sellerStack = {
     name: "Vendedores",
     add: "addSeller",
     addName: "Añadir Vendedor",
+    seller: "SellerPage"
 };
 
 const favoritesStack = {
