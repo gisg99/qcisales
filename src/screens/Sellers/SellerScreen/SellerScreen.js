@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ScrollView, Dimensions } from "react-native";
 import { doc, onSnapshot, collection, query, where, orderBy } from "firebase/firestore";
 import { Carousel, Loading } from "../../../components/Shared";
+import { Header, Info } from "../../../components/Seller";
 import { db } from "../../../utils";
 import { styles } from "./SellerScreen.styles";
 
@@ -23,6 +24,8 @@ export function SellerScreen(props) {
   return (
     <ScrollView style={styles.content}>
       <Carousel arrayImages={seller.images} height={250} width={width}/>
+      <Header seller={seller}/>
+      <Info seller={seller}/>
     </ScrollView>
     )
 }
