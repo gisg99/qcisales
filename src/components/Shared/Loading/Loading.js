@@ -10,7 +10,7 @@ export function Loading(props) {
 
   return (  
     <View style={styles.content}>
-        <ActivityIndicator size="large" color="#F07335"/>
+        <ActivityIndicator size="large" color={"#F07335"}/>
         {text && <Text style={styles.text}>{text}</Text>}
     </View>
   )

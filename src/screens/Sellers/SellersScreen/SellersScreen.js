@@ -54,7 +54,7 @@ export function SellersScreen(props) {
                     reverse
                     type="material-community"
                     name="plus"
-                    color="#F07335"
+                    color={"#F07335"}
                     containerStyle={styles.btnContainer}
                     onPress={goToAddSeller}
                 />

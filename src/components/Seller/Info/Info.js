@@ -7,7 +7,6 @@ import { styles } from "./Info.styles";
 
 export function Info(props) {
     const { seller } = props;
-    console.log(seller);
     const listInfo = [
         {
             text: seller.sellerName,

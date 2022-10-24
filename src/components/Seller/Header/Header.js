@@ -9,7 +9,7 @@ export function Header(props) {
     <View style={styles.content}>
       <View style={styles.titleView}>
         <Text style={styles.name}>{seller.name}</Text>
-        <Rating imageSize={20} readOnly startingValue={3}/>
+        <Rating imageSize={20} readOnly startingValue={seller.ratingMedia | 0}/>
       </View>
       <Text style={styles.description}>{seller.description}</Text>
     </View>
