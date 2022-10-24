@@ -3,6 +3,12 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     content: {
         marginHorizontal: 15,
+        marginTop: 20,
+    },
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 15,
     },
     review: {
         paddingVertical: 20,

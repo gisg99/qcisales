@@ -33,7 +33,7 @@ export function Info(props) {
       <ListItem
         key={"1"}
         bottomDivider
-        onPress={ () => Linking.openURL(`https://wa.me/52${seller.phone}?text=¡Hola!%20Vi%20tu%20publicacion%20en%20qci%20sales%20y%20quisiera%20saber%20si%20aun%20tienes%20${seller.name}`)}
+        onPress={ () => Linking.openURL(`https://wa.me/52${seller.phone}?text=¡Hola!%20Vi%20tu%20publicacion%20en%20Qci%20$ales%20y%20quisiera%20saber%20si%20aun%20tienes%20${seller.name}`)}
         >
             <Icon
             type="material-community"

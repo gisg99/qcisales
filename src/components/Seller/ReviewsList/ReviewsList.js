@@ -21,7 +21,6 @@ export function ReviewsList(props) {
             orderBy("createdAt", "desc")
         );
         onSnapshot(q, (snapshot) => {
-            console.log(snapshot.docs.length);
             setReviews(snapshot.docs);
         })
     }, []);
@@ -30,6 +29,7 @@ export function ReviewsList(props) {
 
   return (
     <View style={styles.content}>
+    <Text style={styles.sectionTitle}>Opiniones:</Text>
       {map(reviews, (review) => {
         const data = review.data();
         const reviewDate = new Date(data.createdAt.seconds * 1000);

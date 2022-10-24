@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, Dimensions } from "react-native";
-import { doc, onSnapshot, collection, query, where, orderBy } from "firebase/firestore";
+import { doc, onSnapshot} from "firebase/firestore";
 import { Carousel, Loading } from "../../../components/Shared";
-import { Header, Info, BtnReviewForm, ReviewsList } from "../../../components/Seller";
+import { Header, Info, BtnReviewForm, ReviewsList, BtnFavorite } from "../../../components/Seller";
 import { db } from "../../../utils";
 import { styles } from "./SellerScreen.styles";
 
@@ -28,6 +28,7 @@ export function SellerScreen(props) {
       <Info seller={seller}/>
       <ReviewsList idSeller={route.params.id}/>
       <BtnReviewForm idSeller={route.params.id}/>
+      <BtnFavorite idSeller={route.params.id}/>
     </ScrollView>
     )
 }
