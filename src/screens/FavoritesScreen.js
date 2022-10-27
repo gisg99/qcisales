@@ -11,7 +11,6 @@ export function FavoritesScreen() {
     const [hasLogged, setHasLogged] = useState(null);
     const [sellers, setSellers] = useState(null);
     const auth = getAuth();
-    console.log(sellers);
 
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
