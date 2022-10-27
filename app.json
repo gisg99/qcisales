@@ -36,6 +36,7 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "description": "App hecha para eficientar el comercio entre estudiantes de CUCEI"
   }
 }
