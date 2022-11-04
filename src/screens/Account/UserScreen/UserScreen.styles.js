@@ -8,13 +8,13 @@ export const styles = StyleSheet.create({
         marginTop: 30,
         paddingVertical: 10,
         borderRadius: 0,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F07335",
         borderTopWidth: 1,
         borderTopColor: "#E3E3E3",
         borderBottomWidth: 1,
         borderBottomColor: "#E3E3E3",
     },
     btnTextStyle: {
-        color: "#F07335",
+        color: "#FFFFFF",
     },
 });
