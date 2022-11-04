@@ -14,6 +14,8 @@ export function ChangePasswordForm(props) {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const onShowPassword = () => setShowPassword((prevState) => !prevState);
     const onShowNewPassword = () => setShowNewPassword((prevState) => !prevState);
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
 
     const formik = useFormik({
         initialValues: initialValues(),
@@ -21,14 +23,26 @@ export function ChangePasswordForm(props) {
         validateOnChange: false,
         onSubmit: async (formValue) => {
             try {
-                const currentUser = getAuth().currentUser;
-                const credentials = EmailAuthProvider.credential(
-                    currentUser.email,
-                    formValue.password,
-                );
-                reauthenticateWithCredential(currentUser, credentials);
-                await updatePassword(currentUser, formValue.newPassword);
-                onClose();
+                reauthenticate(formValue.password).then(async () => {
+                    await updatePassword(currentUser ,formValue.newPassword).then(() => {
+                        console.log("Password updated");
+                        onClose();
+                    }).catch((error) => {
+                        console.log(error);
+                        Toast.show({
+                            type: "error",
+                            position: "bottom",
+                            text1: "Error al cambiar la contraseña",
+                        });
+                    });
+                }).catch((error) => {
+                    console.log(error);
+                    Toast.show({
+                        type: "error",
+                        position: "bottom",
+                        text1: "La contraseña actual es incorrecta",
+                    });
+                });
             } catch (error) {
                 console.log(error);
                 Toast.show({
@@ -37,8 +51,26 @@ export function ChangePasswordForm(props) {
                     text1: "Error al cambiar la contraseña",
                 });
             }
+
+            // changePassword = (currentPassword, newPassword) => {
+            //    this.reauthenticate(currentPassword).then(() => {
+            //        var user = firebase.auth().currentUser;
+            //        user.updatePassword(newPassword).then(() => {
+            //            console.log("Password updated!");
+            //        }).catch((error) => { console.log(error); });
+            //    }).catch((error) => { console.log(error); });
+            // }
+
         }
     });
+
+    const reauthenticate = (password) => {
+      const credentials = EmailAuthProvider.credential(
+          currentUser.email,
+          password,
+      );
+      return reauthenticateWithCredential(currentUser, credentials);
+    }
 
   return (
     <View style={styles.content}>

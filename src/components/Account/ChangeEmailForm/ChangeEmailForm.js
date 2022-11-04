@@ -12,33 +12,54 @@ export function ChangeEmailForm(props) {
     const [showPassword, setShowPassword] = useState(false)
  
     const onShowPassword = () => setShowPassword((prevState) => !prevState);
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
  
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema: validationSchema(),
         validateOnChange: false,
         onSubmit: async (formValue) => {
-           try {
-            const currentUser = getAuth().currentUser;
-
-            const credentials = EmailAuthProvider.credential(
-                currentUser.email,
-                formValue.password,
-            );
-            reauthenticateWithCredential(currentUser, credentials);
-            await updateEmail(currentUser, formValue.email);
-            onReload();
-            onClose();
-           } catch (error) {
+          try {
+            reauthenticate(formValue.password).then(async () => {
+                await updateEmail(currentUser ,formValue.email).then(() => {
+                    console.log("Email updated");
+                    onClose();
+                    onReload();
+                }).catch((error) => {
+                    console.log(error);
+                    Toast.show({
+                        type: "error",
+                        position: "bottom",
+                        text1: "Error al cambiar el correo",
+                    });
+                });
+            }).catch((error) => {
+                console.log(error);
+                Toast.show({
+                    type: "error",
+                    position: "bottom",
+                    text1: "La contraseña actual es incorrecta",
+                });
+            });
+        } catch (error) {
             console.log(error);
             Toast.show({
                 type: "error",
                 position: "bottom",
-                text1: "Error al cambiar el email",
+                text1: "Error al cambiar el correo",
             });
-           }
+        }
         }
     });
+
+    const reauthenticate = (password) => {
+      const credentials = EmailAuthProvider.credential(
+          currentUser.email,
+          password,
+      );
+      return reauthenticateWithCredential(currentUser, credentials);
+    }
 
     return (
     <View style={styles.content}>

@@ -11,7 +11,6 @@ export function SearchScreen() {
     const [searchText, setSearchText] = useState("");
     const [searchResults, setSearchResults] = useState(null);
     const navigation = useNavigation();
-    console.log(size(searchResults));
     
     useEffect(() => {
       (async () => {
